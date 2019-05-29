@@ -38,7 +38,7 @@ class User extends BaseObject implements IdentityInterface
 	public static function findIdentity($id)
 	{
 		self::$users = Users::findOne(['id' => $id])->toArray();
-		return is_array(self::$users) ? new static(self::$users) : null;
+		return is_null(self::$users) ? null : new static(self::$users);
 	}
 
 	/**
@@ -63,7 +63,7 @@ class User extends BaseObject implements IdentityInterface
 	public static function findByUsername($username)
 	{
 		self::$users = Users::findOne(['username' => $username])->toArray();
-		if (is_array(self::$users)) {
+		if (!is_null(self::$users)) {
 			return new static(self::$users);
 		}
 
