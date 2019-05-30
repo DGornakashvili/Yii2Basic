@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Card;
+use app\models\Task;
 use yii\web\Controller;
 
 class TaskController extends Controller
@@ -13,9 +13,9 @@ class TaskController extends Controller
 	}
 
 
-	public function actionCard()
+	public function actionTask()
 	{
-		$model = new Card();
+		$model = new Task();
 		$model->load([
 			'id' => 1,
 			'status' => 'В процессе',

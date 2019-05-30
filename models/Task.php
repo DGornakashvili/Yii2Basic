@@ -5,7 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use app\validator\MyTermValidator;
 
-class Card extends Model
+class Task extends Model
 {
 	public $id;
 	public $status;
