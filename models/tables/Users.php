@@ -2,7 +2,9 @@
 
 namespace app\models\tables;
 
-use yii\db\ActiveRecord;
+use Yii;
+use \yii\db\ActiveRecord;
+use \yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "users".
@@ -12,6 +14,9 @@ use yii\db\ActiveRecord;
  * @property string $password
  * @property string $authKey
  * @property string $accessToken
+ *
+ * @property Tasks[] $creator
+ * @property Tasks[] $responsible
  */
 class Users extends ActiveRecord
 {
@@ -45,5 +50,21 @@ class Users extends ActiveRecord
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
         ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getCreator()
+    {
+        return $this->hasMany(Tasks::class, ['creator_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getResponsible()
+    {
+        return $this->hasMany(Tasks::class, ['responsible_id' => 'id']);
     }
 }

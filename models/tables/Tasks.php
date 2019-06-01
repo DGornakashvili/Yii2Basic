@@ -2,7 +2,9 @@
 
 namespace app\models\tables;
 
-use yii\db\ActiveRecord;
+use Yii;
+use \yii\db\ActiveRecord;
+use \yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "tasks".
@@ -15,7 +17,9 @@ use yii\db\ActiveRecord;
  * @property string $deadline
  * @property int $status_id
  *
- * @property $status
+ * @property Users $creator
+ * @property Users $responsible
+ * @property TaskStatuses $status
  */
 class Tasks extends ActiveRecord
 {
@@ -38,6 +42,9 @@ class Tasks extends ActiveRecord
             [['deadline'], 'safe'],
             [['name'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 255],
+            [['creator_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['creator_id' => 'id']],
+            [['responsible_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['responsible_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => TaskStatuses::class, 'targetAttribute' => ['status_id' => 'id']],
         ];
     }
 
@@ -57,9 +64,27 @@ class Tasks extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery
+     */
+    public function getCreator()
+    {
+        return $this->hasOne(Users::class, ['id' => 'creator_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getResponsible()
+    {
+        return $this->hasOne(Users::class, ['id' => 'responsible_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getStatus()
     {
         return $this->hasOne(TaskStatuses::class, ['id' => 'status_id']);
     }
-
 }

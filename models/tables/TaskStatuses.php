@@ -2,7 +2,9 @@
 
 namespace app\models\tables;
 
-use yii\db\ActiveRecord;
+use Yii;
+use \yii\db\ActiveRecord;
+use \yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "task_statuses".
@@ -43,9 +45,9 @@ class TaskStatuses extends ActiveRecord
         ];
     }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
+    /**
+     * @return ActiveQuery
+     */
     public function getTasks()
     {
         return $this->hasMany(Tasks::class, ['status_id' => 'id']);

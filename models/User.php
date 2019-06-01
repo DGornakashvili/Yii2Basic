@@ -8,37 +8,19 @@ use yii\web\IdentityInterface;
 
 class User extends BaseObject implements IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
+	public $id;
+	public $username;
+	public $password;
+	public $authKey;
+	public $accessToken;
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public static function findIdentity($id)
 	{
-		self::$users = Users::findOne(['id' => $id])->toArray();
-		return is_null(self::$users) ? null : new static(self::$users);
+		$user = Users::findOne(['id' => $id])->toArray();
+		return $user ? new static($user) : null;
 	}
 
 	/**
@@ -46,12 +28,8 @@ class User extends BaseObject implements IdentityInterface
 	 */
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
-		self::$users = Users::findOne(['accessToken' => $token])->toArray();
-		if (self::$users['accessToken'] === $token) {
-			return new static(self::$users);
-		}
-
-		return null;
+		$user = Users::findOne(['accessToken' => $token])->toArray();
+		return $user ? new static($user) : null;
 	}
 
 	/**
@@ -62,12 +40,8 @@ class User extends BaseObject implements IdentityInterface
 	 */
 	public static function findByUsername($username)
 	{
-		self::$users = Users::findOne(['username' => $username])->toArray();
-		if (!is_null(self::$users)) {
-			return new static(self::$users);
-		}
-
-		return null;
+		$user = Users::findOne(['username' => $username])->toArray();
+		return $user ? new static($user) : null;
 	}
 
 	/**
@@ -75,7 +49,7 @@ class User extends BaseObject implements IdentityInterface
 	 */
 	public function getId()
 	{
-		return self::$users['id'];
+		return $this->id;
 	}
 
 	/**
@@ -83,7 +57,7 @@ class User extends BaseObject implements IdentityInterface
 	 */
 	public function getAuthKey()
 	{
-		return self::$users['authKey'];
+		return $this->authKey;
 	}
 
 	/**
@@ -91,7 +65,7 @@ class User extends BaseObject implements IdentityInterface
 	 */
 	public function validateAuthKey($authKey)
 	{
-		return self::$users['authKey'] === $authKey;
+		return $$this->authKey === $authKey;
 	}
 
 	/**
@@ -102,6 +76,6 @@ class User extends BaseObject implements IdentityInterface
 	 */
 	public function validatePassword($password)
 	{
-		return self::$users['password'] === $password;
+		return $this->password === $password;
 	}
 }
