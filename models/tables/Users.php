@@ -14,6 +14,7 @@ use \yii\db\ActiveQuery;
  * @property string $password
  * @property string $authKey
  * @property string $accessToken
+ * @property string $email
  *
  * @property Tasks[] $creator
  * @property Tasks[] $responsible
@@ -34,7 +35,7 @@ class Users extends ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 50],
+            [['username', 'password', 'authKey', 'accessToken', 'email'], 'string', 'max' => 50],
         ];
     }
 
@@ -49,6 +50,7 @@ class Users extends ActiveRecord
             'password' => 'Password',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
+            'email' => 'Email',
         ];
     }
 
