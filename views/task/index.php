@@ -31,10 +31,12 @@ use yii\data\ActiveDataProvider;
 
 /**
  * @var ActiveDataProvider $dataProvider
+ * @var ActiveDataProvider $searchModel
  */
 
 echo ListView::widget([
 	'dataProvider' => $dataProvider,
+	'filterModel' => $searchModel,
 	'itemView' => function ($model) {
 		return TasksPreview::widget(['model' => $model]);
 	},
