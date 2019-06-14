@@ -72,4 +72,23 @@ class TasksFilter extends Tasks
 
         return $dataProvider;
     }
+
+    public function monthFilter($params)
+    {
+	    $query = Tasks::find();
+
+	    $dataProvider = new ActiveDataProvider([
+		    'query' => $query,
+	    ]);
+
+	    $this->load($params);
+
+	    if (!$this->validate()) {
+		    return $dataProvider;
+	    }
+
+	    $query->andFilterWhere(['=', 'MONTH(created)', $this->created]);
+
+	    return $dataProvider;
+    }
 }

@@ -54,6 +54,15 @@ class Users extends ActiveRecord
         ];
     }
 
+    public static function getUsers()
+    {
+		return self::find()
+			->select('username')
+			->asArray()
+			->indexBy('id')
+			->column();
+    }
+
     /**
      * @return ActiveQuery
      */

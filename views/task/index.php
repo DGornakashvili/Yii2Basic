@@ -34,9 +34,10 @@ use yii\data\ActiveDataProvider;
  * @var ActiveDataProvider $searchModel
  */
 
+echo $this->render('_search', ['model' => $searchModel]);
+
 echo ListView::widget([
 	'dataProvider' => $dataProvider,
-	'filterModel' => $searchModel,
 	'itemView' => function ($model) {
 		return TasksPreview::widget(['model' => $model]);
 	},

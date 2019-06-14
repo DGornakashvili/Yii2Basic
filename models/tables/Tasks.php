@@ -2,12 +2,13 @@
 
 namespace app\models\tables;
 
-use app\models\NotificationBehavior;
 use Yii;
-use \yii\db\ActiveRecord;
-use \yii\db\ActiveQuery;
-use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
+use app\models\TasksCacheBehavior;
+use app\models\NotificationBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "tasks".
@@ -49,7 +50,10 @@ class Tasks extends ActiveRecord
 			],
 			'notification' => [
 				'class' => NotificationBehavior::class,
-			]
+			],
+			'clearCache' => [
+				'class' => TasksCacheBehavior::class,
+			],
 		];
 	}
 

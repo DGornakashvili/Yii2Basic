@@ -113,3 +113,13 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+#w0 {
+    display: flex;
+}
+
+.btn-primary {
+    align-self: center;
+    height: 34px;
+    margin-left: 15px;
+}

@@ -25,7 +25,7 @@
 
     .field-tasks-responsible,
     .field-tasks-deadline {
-        width: 49%;
+        width: 35%;
     }
 
     .btn {
@@ -42,18 +42,41 @@ use \yii\helpers\Html;
 
 /**
  * @var Tasks $model
+ * @var array $statuses
+ * @var array $users
  */
 ?>
 <div class="form-container">
 	<?php
 	$task = ActiveForm::begin();
 
-	echo $task->field($model, 'name')->textInput(['class' => 'form-input form-input__name']);
-	echo $task->field($model, 'status')->textInput(['class' => 'form-input form-input__status']);
-	echo $task->field($model, 'creator')->textInput(['class' => 'form-input form-input__creator']);
-	echo $task->field($model, 'description')->textInput(['class' => 'form-input form-input__description']);
-	echo $task->field($model, 'responsible')->textInput(['class' => 'form-input form-input__responsible']);
-	echo $task->field($model, 'deadline')->textInput(['class' => 'form-input form-input__deadline']);
+	echo $task
+        ->field($model, 'name')
+        ->textInput(['class' => 'form-input form-input__name']);
+
+	echo $task
+        ->field($model, 'status_id')
+        ->label('Status')
+        ->dropDownList($statuses, ['class' => 'form-input form-input__status']);
+
+	echo $task
+        ->field($model, 'creator_id')
+        ->label('Creator')
+        ->dropDownList($users, ['class' => 'form-input form-input__creator']);
+
+	echo $task
+        ->field($model, 'description')
+        ->textInput(['class' => 'form-input form-input__description']);
+
+	echo $task
+        ->field($model, 'responsible_id')
+        ->label('Responsible')
+        ->dropDownList($users, ['class' => 'form-input form-input__responsible']);
+
+	echo $task
+        ->field($model, 'deadline')
+        ->input('date', ['class' => 'form-input form-input__deadline']);
+
 	echo Html::submitButton('Подтвердить', ['class' => 'btn btn-success']);
 
 	ActiveForm::end();

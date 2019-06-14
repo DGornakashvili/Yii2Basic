@@ -45,6 +45,15 @@ class TaskStatuses extends ActiveRecord
         ];
     }
 
+    public static function getStatuses()
+    {
+    	return self::find()
+		    ->select('name')
+		    ->asArray()
+		    ->indexBy('id')
+		    ->column();
+    }
+
     /**
      * @return ActiveQuery
      */
