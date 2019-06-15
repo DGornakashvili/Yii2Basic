@@ -26,6 +26,8 @@ use yii\behaviors\TimestampBehavior;
  * @property Users $creator
  * @property Users $responsible
  * @property TaskStatuses $status
+ * @property Comments $comments
+ * @property TaskAttachments $attachments
  */
 class Tasks extends ActiveRecord
 {
@@ -81,12 +83,12 @@ class Tasks extends ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'name' => 'Name',
-			'description' => 'Description',
-			'creator_id' => 'Creator ID',
-			'responsible_id' => 'Responsible ID',
-			'deadline' => 'Deadline',
-			'status_id' => 'Status ID',
+			'name' => Yii::t('app', 'task_name'),
+			'description' => Yii::t('app', 'task_description'),
+			'creator_id' => Yii::t('app', 'task_creator'),
+			'responsible_id' => Yii::t('app', 'task_responsible'),
+			'deadline' => Yii::t('app', 'task_deadline'),
+			'status_id' => Yii::t('app', 'task_status'),
 			'created' => 'Created',
 			'updated' => 'Updated',
 		];
@@ -114,5 +116,21 @@ class Tasks extends ActiveRecord
 	public function getStatus()
 	{
 		return $this->hasOne(TaskStatuses::class, ['id' => 'status_id']);
+	}
+
+	/**
+	 * @return ActiveQuery
+	 */
+	public function getComments()
+	{
+		return $this->hasMany(Comments::class, ['task_id' => 'id']);
+	}
+
+	/**
+	 * @return ActiveQuery
+	 */
+	public function getAttachments()
+	{
+		return $this->hasMany(TaskAttachments::class, ['task_id' => 'id']);
 	}
 }

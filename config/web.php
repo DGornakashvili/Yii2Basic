@@ -5,13 +5,26 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+	'language' => 'en',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'bootstrap'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@images'   => '@app/web/images',
     ],
     'components' => [
+    	'i18n' => [
+    		'translations' => [
+    			'app*' => [
+    				'class' => yii\i18n\PhpMessageSource::class,
+				    'basePath' => '@app/messages'
+			    ]
+		    ]
+	    ],
+    	'bootstrap' => [
+    		'class' => app\components\Bootstrap::class
+	    ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'xgh32lxFKH_qeBzmSjzlCxW749ORQOr8',

@@ -3,8 +3,8 @@
 namespace app\models\tables;
 
 use Yii;
-use \yii\db\ActiveRecord;
 use \yii\db\ActiveQuery;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "users".
@@ -16,8 +16,9 @@ use \yii\db\ActiveQuery;
  * @property string $accessToken
  * @property string $email
  *
- * @property Tasks[] $creator
- * @property Tasks[] $responsible
+ * @property Tasks $creator
+ * @property Tasks $responsible
+ * @property Comments $comments
  */
 class Users extends ActiveRecord
 {
@@ -78,4 +79,12 @@ class Users extends ActiveRecord
     {
         return $this->hasMany(Tasks::class, ['responsible_id' => 'id']);
     }
+
+	/**
+	 * @return ActiveQuery
+	 */
+	public function getComments()
+	{
+		return $this->hasMany(Comments::class, ['task_id' => 'id']);
+	}
 }
