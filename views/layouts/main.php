@@ -42,6 +42,7 @@ AppAsset::register($this);
 	            ['label' => 'ru', 'url' => ['/site/set-language', 'language' => 'ru']],
 	            ['label' => 'en', 'url' => ['/site/set-language', 'language' => 'en']],
             ]],
+            ['label' => 'Tasks', 'url' => ['/task']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

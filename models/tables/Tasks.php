@@ -133,4 +133,13 @@ class Tasks extends ActiveRecord
 	{
 		return $this->hasMany(TaskAttachments::class, ['task_id' => 'id']);
 	}
+
+	public static function findDeadlineExpires($days)
+	{
+		return self::find()
+			->where(['>=', 'DATEDIFF(deadline, NOW())', 0])
+			->andWhere(['<=', 'DATEDIFF(deadline, NOW())', $days])
+			->with('responsible')
+			->all();
+	}
 }
