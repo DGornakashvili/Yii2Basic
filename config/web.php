@@ -14,6 +14,9 @@ $config = [
         '@images'   => '@app/web/images',
     ],
     'components' => [
+	    'authManager' => [
+		    'class' => 'yii\rbac\DbManager'
+	    ],
     	'i18n' => [
     		'translations' => [
     			'app*' => [

@@ -8,6 +8,7 @@ use yii\base\Exception;
 use yii\web\UploadedFile;
 use app\models\tables\Tasks;
 use app\models\tables\Users;
+use yii\filters\AccessControl;
 use yii\caching\TagDependency;
 use app\models\tables\Comments;
 use app\models\filters\TasksFilter;
@@ -16,6 +17,28 @@ use app\models\forms\AttachmentsForm;
 
 class TaskController extends Controller
 {
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::class,
+				'only' => ['preview', 'save'],
+				'rules' => [
+					[
+						'actions' => ['preview'],
+						'allow' => true,
+						'roles' => ['@'],
+					],
+					[
+						'actions' => ['save'],
+						'allow' => true,
+						'roles' => ['taskUpdate'],
+					],
+				],
+			],
+		];
+	}
+
 	public function actionIndex()
 	{
 		$searchModel = new TasksFilter();
@@ -40,11 +63,6 @@ class TaskController extends Controller
 	{
 		$model = Tasks::findOne($id);
 
-		if (Yii::$app->request->post()) {
-			$model->load(Yii::$app->request->post());
-			$model->save();
-		}
-
 		return $this->render(
 			'preview',
 			[
@@ -56,6 +74,18 @@ class TaskController extends Controller
 				'userId' => Yii::$app->user->id,
 			]
 		);
+	}
+
+	public function actionSave($id)
+	{
+		$model = Tasks::findOne($id);
+
+		if (Yii::$app->request->post()) {
+			$model->load(Yii::$app->request->post());
+			$model->save();
+		}
+
+		$this->redirect(Yii::$app->request->referrer);
 	}
 
 	public function actionSaveComment()

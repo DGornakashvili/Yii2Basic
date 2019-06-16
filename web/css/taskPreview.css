@@ -1,0 +1,82 @@
+.form-container form,
+.comments-container form,
+.upload-container form {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 70%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.attachments-container,
+.flex-container,
+.all-attachments {
+	display: flex;
+	justify-content: space-between;
+}
+
+.comments-container,
+.upload-container {
+	width: 49%;
+}
+
+.form-group {
+	width: 32%;
+}
+
+.form-input {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+}
+
+.field-tasks-description,
+.field-comments-comment,
+.field-attachmentsform-upload {
+	width: 100%;
+}
+
+.field-attachmentsform-taskid {
+	display: none;
+}
+
+.field-attachmentsform-upload {
+	margin-top: 20px;
+}
+
+#attachmentsform-upload {
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	padding: 22px 20%;
+	border: 1px solid #A9A9A9;
+}
+
+.field-tasks-responsible,
+.field-tasks-deadline {
+	width: 35%;
+}
+
+.btn {
+	width: 50%;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+
+.all-attachments,
+.all-comments {
+	width: 45%;
+}
+
+.all-attachments {
+	flex-wrap: wrap;
+}
+.all-attachments a {
+	margin: 10px;
+}
+
+hr {
+	margin: 20px auto 0;
+}
