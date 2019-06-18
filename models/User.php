@@ -66,7 +66,7 @@ class User extends BaseObject implements IdentityInterface
 	 */
 	public function validateAuthKey($authKey)
 	{
-		return $$this->authKey === $authKey;
+		return $this->authKey === $authKey;
 	}
 
 	/**
